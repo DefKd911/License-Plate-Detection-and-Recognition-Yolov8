@@ -22,19 +22,4 @@ YOLOv8 (You Only Look Once version 8) is an advanced object detection model desi
 It improves upon previous versions by enhancing accuracy and speed. YOLOv8 uses a single neural network to predict bounding boxes and class probabilities directly from images, making it suitable for applications requiring fast and accurate object detection.
 
 
-#  Folder Structure
-Car-License-Plate-Recognition-Yolov8/
-│
-├── yolov8_model/                 # YOLOv8 model files
-│   └── kbest.pt
-│
-├── images/                       # Example images for testing
-│   └── example_image.jpg
-│
-├── videos/                       # Example videos for testing
-│   └── example_video.mp4
-│
-├── app.py                        # Streamlit application script
-├── requirements.txt              # Dependencies
-├── README.md                     # Project documentation
-└── .gitignore                    # Git ignore file
+
