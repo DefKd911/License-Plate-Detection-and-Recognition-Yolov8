@@ -21,7 +21,5 @@ his project implements a License Plate Detection and Recognition system using YO
 YOLOv8 (You Only Look Once version 8) is an advanced object detection model designed for real-time detection. 
 It improves upon previous versions by enhancing accuracy and speed. YOLOv8 uses a single neural network to predict bounding boxes and class probabilities directly from images, making it suitable for applications requiring fast and accurate object detection.
 
-
+# Demo : Video 
 [Watch the demo](output/ed2a95dc3be8bd80e1e81786583ff0cc5920080847ebf493686b7677.mp4)
-
-[Watch the full video](output/ed2a95dc3be8bd80e1e81786583ff0cc5920080847ebf493686b7677.mp4)
