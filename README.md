@@ -138,76 +138,46 @@ streamlit run src/yoloapplication.py
 jupyter notebook notebooks/cars-license-plate-yolov8.ipynb
 ```
 
-### ▶️ **Command Line Usage**
-```bash
-# For single image processing
-python src/detection.py --source path/to/image.jpg --weights models/kbest.pt
 
-# For video processing
-python src/detection.py --source path/to/video.mp4 --weights models/kbest.pt
-```
-
----
 
 ## 📊 Model Performance
 
 ### Training Details:
-- **Dataset**: Custom annotated license plate dataset (5000+ images)
-- **Architecture**: YOLOv8s (Small variant)
+- **Dataset**:
+      len(train) = 345
+      len(val) = 44
+      len(test) = 44
+- **Architecture**: YOLOv8n (nano variant)
 - **Training Epochs**: 100
-- **Image Size**: 640x640
+- **Image Size**: 320 X 320
 - **Batch Size**: 16
 - **Optimizer**: AdamW
-- **Learning Rate**: 0.001 (with cosine scheduling)
+- **Learning Rate**: 0.01
 
+  
 ### Performance Metrics:
-- **mAP@0.5**: 94.2%
-- **mAP@0.5:0.95**: 87.6%
-- **Precision**: 92.8%
-- **Recall**: 89.4%
-- **Inference Speed**: ~45 FPS (GPU) / ~12 FPS (CPU)
-
----
-
-## 🔧 Configuration
-
-### Model Parameters (config.yaml):
-```yaml
-# Detection settings
-confidence_threshold: 0.5
-iou_threshold: 0.4
-max_detections: 10
-
-# OCR settings
-ocr_engine: "easyocr"  # "easyocr" or "tesseract"
-languages: ["en"]
-
-# Processing settings
-input_size: 640
-device: "auto"  # "cpu", "cuda", or "auto"
-```
+- **mAP@0.5**: 91.7%
+- **mAP@0.5:0.95**: 53.9%
+- **Precision**: 86.3%
+- **Recall**: 86.2 %
+- Speed: 0.8ms preprocess, 46.4ms inference, 0.7ms postprocess per image at shape (1, 3, 224, 320)
+- **Inference time**: 50 ms
+- **Inference Speed**: ~  1000/45 ~ 23 FPS 
 
 ---
 
 ## 📈 Example Results
 
 ### Input Image:
-![Input](demo_input.jpg)
+![image](https://github.com/user-attachments/assets/b05455f2-4424-43c5-92fa-5742d7448710)
+
 
 ### Detection Output:
-- **Detected Plates**: 2
-- **Confidence Scores**: [0.94, 0.87]
+- **Detected Plates**: 1
+- **Confidence Scores**: [0.87]
 - **Extracted Text**: 
-  - Plate 1: "DL8CAF5034" (Confidence: 94%)
-  - Plate 2: "MH12AB1234" (Confidence: 87%)
-
-### Processing Time:
-- **Detection**: 23ms
-- **OCR**: 156ms
-- **Total**: 179ms
-
----
-
+  - Plate : "DL8CAF5030"
+  
 ## 🛠️ Technical Details
 
 ### YOLOv8 Architecture Components:
@@ -224,11 +194,8 @@ device: "auto"  # "cpu", "cuda", or "auto"
 5. **Results Formatting**: Combine detection and OCR results
 
 ### OCR Integration:
-- **EasyOCR**: Better for non-English characters and complex fonts
 - **Tesseract**: Faster processing, good for standard fonts
-- **Preprocessing**: Image enhancement, noise reduction, contrast adjustment
 
----
 
 ## 🎯 Future Enhancements
 
@@ -272,25 +239,6 @@ torchvision>=0.15.0
 
 ---
 
-## 🤝 Contributing
-
-We welcome contributions! Here's how you can help:
-
-1. **Fork the repository**
-2. **Create a feature branch**: `git checkout -b feature-name`
-3. **Make your changes** and test thoroughly
-4. **Commit your changes**: `git commit -m 'Add feature-name'`
-5. **Push to the branch**: `git push origin feature-name`
-6. **Submit a Pull Request**
-
-### Contribution Guidelines:
-- Follow PEP 8 style guide for Python code
-- Add docstrings to all functions and classes
-- Include unit tests for new features
-- Update documentation as needed
-
----
-
 ## 📜 License
 
 This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
@@ -316,30 +264,9 @@ copies or substantial portions of the Software.
 ## 🙌 Acknowledgements
 
 - **[Ultralytics](https://ultralytics.com/)** - For the amazing YOLOv8 framework
-- **[Streamlit](https://streamlit.io/)** - For the interactive web app framework
-- **[EasyOCR](https://github.com/JaidedAI/EasyOCR)** - For robust OCR capabilities
+- **[Streamlit](https://streamlit.io/)** - For the interactive web app frameworks
 - **[Tesseract](https://tesseract-ocr.github.io/)** - For traditional OCR support
 - **[OpenCV](https://opencv.org/)** - For computer vision utilities
 - **Community Contributors** - For dataset annotations and testing
 
 ---
-
-## 📞 Support
-
-If you encounter any issues or have questions:
-
-1. **Check the [Issues](https://github.com/your-username/cars-license-plate-yolov8/issues)** page
-2. **Create a new issue** with detailed description
-3. **Join our [Discussions](https://github.com/your-username/cars-license-plate-yolov8/discussions)**
-
----
-
-## 🌟 Star History
-
-If you find this project helpful, please consider giving it a ⭐!
-
-[![Star History Chart](https://api.star-history.com/svg?repos=your-username/cars-license-plate-yolov8&type=Date)](https://star-history.com/#your-username/cars-license-plate-yolov8&Date)
-
----
-
-**Made with ❤️ and YOLOv8**
