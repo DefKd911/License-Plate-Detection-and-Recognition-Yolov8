@@ -1,0 +1,11 @@
+services:
+  plate-api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      # Change to "cuda:0" if you build a GPU image + NVIDIA runtime
+      YOLO_DEVICE: "cpu"
+      YOLO_CONF: "0.25"
+      MODEL_PATH: "kbest.pt"
+

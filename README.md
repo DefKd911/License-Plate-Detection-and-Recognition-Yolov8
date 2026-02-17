@@ -11,12 +11,16 @@ Users can upload images or videos, and the app detects license plates, extracts 
 ## 📌 Features
 
 - 🔍 **YOLOv8-powered license plate detection** with high accuracy
-- 📝 **OCR integration** (EasyOCR / Tesseract) for text extraction
+- 📝 **OCR integration** (EasyOCR) for text extraction - better accuracy for license plates
 - 🎥 Upload **images or video files** for processing
 - 🌐 Simple and interactive **Streamlit web app**
 - ⚡ **Real-time processing** with optimized inference
 - 📊 **Confidence scoring** for detections
 - 🎯 **Bounding box visualization** with extracted text overlay
+
+### 📚 Detailed documentation (FastAPI + Docker)
+
+See `DOCUMENTATION.md`.
 
 ### 🚀 Applications
 - Traffic monitoring and law enforcement
@@ -123,7 +127,7 @@ pip install -r requirements.txt
 
 ### ▶️ **Run the Streamlit Web Application**
 ```bash
-streamlit run src/yoloapplication.py
+streamlit run yoloapplication.py
 ```
 
 1. Open your browser and navigate to `http://localhost:8501`
@@ -131,6 +135,63 @@ streamlit run src/yoloapplication.py
 3. Adjust detection confidence threshold if needed
 4. Click "Process" to detect license plates
 5. View results with bounding boxes and extracted text
+
+---
+
+## 🔌 FastAPI (REST API)
+
+This repo now also includes a **FastAPI backend** so you can integrate plate detection into any app (web/mobile/IoT).
+
+### Run locally (no Docker)
+
+```bash
+pip install -r requirements.txt
+uvicorn app.main:app --reload --port 8000
+```
+
+- Health check: `http://localhost:8000/health`
+- Swagger UI: `http://localhost:8000/docs`
+
+### Example request (Windows PowerShell)
+
+```powershell
+curl.exe -X POST "http://localhost:8000/predict?conf=0.25" -F "file=@your_image.jpg"
+```
+
+### Get annotated image (with boxes/text)
+
+```powershell
+curl.exe -X POST "http://localhost:8000/predict/annotated?conf=0.25" -F "file=@your_image.jpg" --output out.jpg
+```
+
+---
+
+## 🐳 Docker (deploy anywhere)
+
+### Build
+
+```bash
+docker build -t plate-api .
+```
+
+### Run
+
+```bash
+docker run --rm -p 8000:8000 plate-api
+```
+
+Then open `http://localhost:8000/docs`.
+
+### Using your own weights (optional)
+
+If you want to keep weights outside the image:
+
+```bash
+docker run --rm -p 8000:8000 ^
+  -e MODEL_PATH=/models/kbest.pt ^
+  -v "%cd%\\models:/models" ^
+  plate-api
+```
 
 ### ▶️ **Training Custom Model** (Advanced)
 ```bash
@@ -194,7 +255,7 @@ jupyter notebook notebooks/cars-license-plate-yolov8.ipynb
 5. **Results Formatting**: Combine detection and OCR results
 
 ### OCR Integration:
-- **Tesseract**: Faster processing, good for standard fonts
+- **EasyOCR**: Deep learning-based OCR with better accuracy for license plates, handles preprocessing automatically
 
 
 ## 🎯 Future Enhancements
@@ -224,7 +285,6 @@ numpy>=1.24.0
 
 # OCR dependencies
 easyocr>=1.7.0
-pytesseract>=0.3.10
 
 # Additional utilities
 pandas>=2.0.0
@@ -265,7 +325,7 @@ copies or substantial portions of the Software.
 
 - **[Ultralytics](https://ultralytics.com/)** - For the amazing YOLOv8 framework
 - **[Streamlit](https://streamlit.io/)** - For the interactive web app frameworks
-- **[Tesseract](https://tesseract-ocr.github.io/)** - For traditional OCR support
+- **[EasyOCR](https://github.com/JaidedAI/EasyOCR)** - For deep learning-based OCR support
 - **[OpenCV](https://opencv.org/)** - For computer vision utilities
 - **Community Contributors** - For dataset annotations and testing
 
