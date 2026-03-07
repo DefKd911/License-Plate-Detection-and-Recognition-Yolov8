@@ -22,6 +22,10 @@ Users can upload images or videos, and the app detects license plates, extracts 
 
 See `DOCUMENTATION.md`.
 
+### ☁️ AWS deployment (cloud terms, free tier, step-by-step)
+
+See `AWS_DEPLOYMENT_GUIDE.md` for deploying this API on AWS (EC2, ECS Fargate, App Runner) with free-tier options.
+
 ### 🚀 Applications
 - Traffic monitoring and law enforcement
 - Automated toll collection systems

@@ -1,0 +1,26 @@
+{
+  "family": "plate-api",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::YOUR_ACCOUNT_ID:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "plate-api",
+      "image": "YOUR_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/plate-api:latest",
+      "portMappings": [{ "containerPort": 8000 }],
+      "environment": [
+        { "name": "YOLO_DEVICE", "value": "cpu" },
+        { "name": "YOLO_CONF", "value": "0.25" }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/plate-api",
+          "awslogs-region": "us-east-1"
+        }
+      }
+    }
+  ]
+}
